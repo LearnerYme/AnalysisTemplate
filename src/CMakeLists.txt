@@ -35,7 +35,13 @@ include_directories(
         ${Boost_INCLUDE_DIRS}
         )
 
-add_library(AnalysisTreeUser SHARED G__AnalysisTreeUser.cxx)
+set(
+        ADD_TOOLS
+        MultiplicityTool.cxx
+        IdxConstants.cxx
+)
+
+add_library(AnalysisTreeUser SHARED ${ADD_TOOLS} G__AnalysisTreeUser.cxx)
 target_compile_definitions(
         AnalysisTreeUser 
         PUBLIC
