@@ -79,6 +79,7 @@ int main(int argc, char** argv) {
 
 	std::unique_ptr<TFile> tf(new TFile("test.root", "recreate"));
 	tf->cd();
+	std::unique_ptr<TH1F> hMcEta(new TH1F("hMcEta", "Proton and Neutron;#eta;", 200, -10, 10));
 
 	for (auto iEv=0; iEv<nEv; iEv++) {
 		t.GetEntry(iEv);
@@ -86,26 +87,10 @@ int main(int argc, char** argv) {
             int motherId = McParticle.GetField<int>(IdxSimMotherId);
             if (motherId != -1) { continue; } // not primary track
             if (mDupRmver->Make(McParticle)) { continue; }
-			// int pid = McParticle.GetPid();
-			// if (fabs(pid) != 2212 && fabs(pid) != 2112) { continue; }
+			int pid = McParticle.GetPid();
+			if (fabs(pid) != 2212 && fabs(pid) != 2112) { continue; }
             float McEta = McParticle.GetEta();
-			float mass = McParticle.GetMass();
-			lvec.SetPxPyPzE(
-				McParticle.GetPx(),
-				McParticle.GetPy(),
-				McParticle.GetPz(),
-				McParticle.GetEnergy()
-			);
-			lvec.Boost(0, 0, vz);
-			float EtaRaw = lvec.PseudoRapidity();
-			// cout << "[DEBUG]: eta " << McEta << " -> " << EtaRaw;
-			// cout << " | " << McParticle.GetPx();
-			// cout << " | " << McParticle.GetPy();
-			// cout << " | " << McParticle.GetPz();
-			// cout << " | " << McParticle.GetEnergy();
-			// cout << " | " << pz << endl;
-			hEta->Fill(McEta);
-			hEtaRaw->Fill(EtaRaw);
+			hMcEta->Fill(McEta);
 		}
 	}
 
