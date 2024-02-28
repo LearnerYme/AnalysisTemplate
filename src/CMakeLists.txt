@@ -71,5 +71,5 @@ include(${ROOT_USE_FILE})
 include_directories(${ROOT_INCLUDE_DIR} ${ROOT_INCLUDE_DIRS} ${AnalysisTree_INCLUDE_DIR})
 
 add_executable(AnalysisTemplate AnalysisTemplate.cpp)
-target_link_libraries(AnalysisTemplate ${ROOT_LIBRARIES} AnalysisTreeBase AnalysisTreeInfra AnalysisTreeUser)
+target_link_libraries(AnalysisTemplate ${ROOT_LIBRARIES} AnalysisTreeBase AnalysisTreeInfra AnalysisTreeUser EG)
 
