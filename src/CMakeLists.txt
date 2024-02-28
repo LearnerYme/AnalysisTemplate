@@ -37,8 +37,9 @@ include_directories(
 
 set(
         ADD_TOOLS
-        MultiplicityTool.cxx
-        IdxConstants.cxx
+        MultiplicityTool/MultiplicityTool.cxx
+        IdxConstants/IdxConstants.cxx
+        DuplicateRemover/DuplicateRemover.cxx
 )
 
 add_library(AnalysisTreeUser SHARED ${ADD_TOOLS} G__AnalysisTreeUser.cxx)
