@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.5)
 project(AnalysisTemplate CXX)
 
 set(
@@ -42,34 +42,13 @@ set(
         DuplicateRemover/DuplicateRemover.cxx
 )
 
-add_library(AnalysisTreeUser SHARED ${ADD_TOOLS} G__AnalysisTreeUser.cxx)
-target_compile_definitions(
-        AnalysisTreeUser 
-        PUBLIC
-        ${ANALYSISTREE_BOOST_FOUND}
-        )
-
-ROOT_GENERATE_DICTIONARY(
-        G__AnalysisTreeUser 
-        ${HEADERS}
-        LINKDEF AnalysisTreeUserLinkDef.h
-        OPTIONS
-        -I${CMAKE_BINARY_DIR}/include
-        $<$<BOOL:${Boost_FOUND}>:-DANALYSISTREE_BOOST_FOUND>
-        )
-
-target_link_libraries(
-        AnalysisTreeUser
-        PUBLIC
-        ${ROOT_LIBRARIES}
-        AnalysisTreeBase 
-        AnalysisTreeInfra
-        $<$<BOOL:${Boost_FOUND}>:${Boost_LIBRARIES}>
-        )
+add_library(MultiplicityTool MultiplicityTool/MultiplicityTool.cxx)
+add_library(IdxConstants IdxConstants/IdxConstants.cxx)
+add_library(DuplicateRemover DuplicateRemover/DuplicateRemover.cxx)
 
 include(${ROOT_USE_FILE})
 include_directories(${ROOT_INCLUDE_DIR} ${ROOT_INCLUDE_DIRS} ${AnalysisTree_INCLUDE_DIR})
 
 add_executable(AnalysisTemplate AnalysisTemplate.cpp)
-target_link_libraries(AnalysisTemplate ${ROOT_LIBRARIES} AnalysisTreeBase AnalysisTreeInfra AnalysisTreeUser EG)
+target_link_libraries(AnalysisTemplate ${ROOT_LIBRARIES} AnalysisTreeBase AnalysisTreeInfra MultiplicityTool IdxConstants DuplicateRemover)
 
