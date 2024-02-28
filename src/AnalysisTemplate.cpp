@@ -72,15 +72,15 @@ int main(int argc, char** argv) {
 	MultiplitityTool* mMultTool = new MultiplitityTool();
 	mMultTool->Init();
 	mMultTool->EnableMc(true);
-
+	
 	// duplicated MC particle remover
 	DuplicateRemover* mDupRmver = new DuplicateRemover();
 	mDupRmver->Init();
 
-	std::unique_ptr<TFile> tf(new TFile("test.root", "recreate"));
+	TFile* tf = new TFile("test.root", "recreate");
 	tf->cd();
-	std::unique_ptr<TH1F> hMcEta(new TH1F("hMcEta", "Proton and Neutron;#eta;", 200, -10, 10));
-
+	TH1F* hMcEta = new TH1F("hMcEta", "Proton and Neutron;#eta;", 200, -10, 10);
+	
 	for (auto iEv=0; iEv<nEv; iEv++) {
 		t.GetEntry(iEv);
 		for (auto const& McParticle : *mSimTracks) {
