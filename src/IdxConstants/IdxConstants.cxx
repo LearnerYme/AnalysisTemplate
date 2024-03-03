@@ -34,10 +34,6 @@
 
 // SimParticles
 #ifdef __SIMPARTICLE_IDX__
-    // integer
-    extern const Indey_t IdxSimMotherId; // -1 for primary
-    extern const Indey_t IdxSimPdgId;
-
     // init
     constexpr Indey_t IdxSimEta = -6;
     constexpr Indey_t IdxSimP = -10;
