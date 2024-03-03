@@ -2,9 +2,9 @@
 
 Author: Yige Huang
 
-Date: 28.02.2024
+Date: 03.03.2024
 
-Version: 1.0
+Version: 1.1
 
 ## Quick start
 
@@ -18,6 +18,10 @@ Version: 1.0
 4. compile and run
 
 ## Patch note
+
+03.03.2024 by yghuang (v1.1):
+
+* Fix a minor bug in simulated particle (SimTrack)
 
 28.02.2024 by yghuang (v1.0):
 

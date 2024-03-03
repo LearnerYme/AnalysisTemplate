@@ -3,7 +3,7 @@ project(AnalysisTemplate CXX)
 
 set(
         AnalysisTree_Home
-        /Users/huangyige/Work/DataAnalysis/gsi/AnalysisTree
+        /u/yige/Work/AnalysisTree
         )
 
 set(
@@ -35,20 +35,14 @@ include_directories(
         ${Boost_INCLUDE_DIRS}
         )
 
-set(
-        ADD_TOOLS
-        MultiplicityTool/MultiplicityTool.cxx
-        IdxConstants/IdxConstants.cxx
-        DuplicateRemover/DuplicateRemover.cxx
-)
-
 add_library(MultiplicityTool MultiplicityTool/MultiplicityTool.cxx)
 add_library(IdxConstants IdxConstants/IdxConstants.cxx)
 add_library(DuplicateRemover DuplicateRemover/DuplicateRemover.cxx)
+add_library(CbmCut CbmCut/CbmCut.cxx)
 
 include(${ROOT_USE_FILE})
 include_directories(${ROOT_INCLUDE_DIR} ${ROOT_INCLUDE_DIRS} ${AnalysisTree_INCLUDE_DIR})
 
-add_executable(AnalysisTemplate AnalysisTemplate.cpp)
-target_link_libraries(AnalysisTemplate ${ROOT_LIBRARIES} AnalysisTreeBase AnalysisTreeInfra MultiplicityTool IdxConstants DuplicateRemover)
+add_executable(AnalysisExec AnalysisTemplate.cpp)
+target_link_libraries(AnalysisExec ${ROOT_LIBRARIES} AnalysisTreeBase AnalysisTreeInfra MultiplicityTool IdxConstants DuplicateRemover)
 
